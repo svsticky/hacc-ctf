@@ -1,0 +1,13 @@
+# POST
+POST submit
+ 
+# GET
+GET /
+GET /standings
+GET /flags.txt
+GET /config.js
+GET /flavour_texts.js
+GET /sitemap.txt
+GET /disclaimer.txt
+
+# 1 node hidden

@@ -1,0 +1,15 @@
+Welkom bij de HACC CTF 25-26! Door mee te doen ga je akkoord met een aantal regels: 
+
+1. Wees lief met de server! We geven de garantie dat geen van de flags een bruteforce oplossing heeft; 
+   submit dus alleen een flag als je zeker bent dat deze bestaat. Spammen van van submissions om flags te
+   achterhalen zal resulteren in een diskwalificatie (en een boze commissie).
+2. De submission site hacken wordt NIET gewaardeerd. 
+3. NSFW taalgebruik in usernames wordt NIET gewaardeerd (al staat er geen filter op afgezien van maximumlengte, aangezien die dingen 
+   meestal toch wel te omzeilen zijn als je creatief genoeg bent). 
+4. Beperkte samenwerking is toegestaan, maar hou rekening met het feit dat er een beperkte hoeveelheid prijzen is. Hou het sportief, 
+   en spreek bij twijfel een commissielid aan. 
+5. Problemen met de server? Neem contact op met Job (j.vonk@uu.nl / telefonisch maar dat nummer zetten we maar even niet online) 
+
+Credits voor het maken van de submission website gaan naar Thomas van der Plas.
+
+Als beloning voor tot het einde van de disclaimer lezen, submit een vlag met met als code de eerste 8 getallen van de MD5 hash van dit document. 

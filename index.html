@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HACC CTF 2025</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      align-items: center;
+    }
+    .header {
+      padding: 10px 20px;
+      background: #2a2a2a;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 70px;
+      gap: 10px;
+    }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      background: #333;
+      border-radius: 5px;
+    }
+    .tab.active {
+      background: #0b6200;
+    }
+    .content {
+      display: none ;
+      padding: 20px;
+      background: #2a2a2a;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      max-width: 1300px;
+      width: calc(100% - 60px);
+      margin-top: 20px;
+    }
+    .content.active {
+      display: block;
+    }
+    .content.submissions.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 50vh;
+      max-width: 400px;
+      width: calc(100% - 60px);
+    }
+    .message {
+      margin-top: 10px;
+      font-size: 1em;
+      text-align: center;
+    }
+    .error {
+      color: red;
+    }
+    .success {
+      color: green;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      border-bottom: 1px solid #444;
+      text-align: left;
+    }
+    thead {
+      background: #0b6200;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #3a3a3a;
+      color: white;
+    }
+    button {
+      background: #0b6200;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #066401;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #2a2a2a;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    
+    .footer a {
+      color: #0b6200;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">HACC CTF 2025</div>
+  
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('leaderboard')">Leaderboard</div>
+    <div class="tab" onclick="switchTab('submissions')">Submissions</div>
+  </div>
+  
+  <div id="leaderboard" class="leaderboard content active">
+    <table>
+      <thead>
+        <th>User</th>
+        <th>Score</th>
+        <th>Total Time</th>
+      </thead>
+      <tbody id="leaderboard_body"></tbody>
+    </table>
+  </div>
+  
+  <div id="submissions" class="submissions content">
+    <input maxlength="16" type="text" id="user_input" placeholder="Username">
+    <input placeholder="ctf_12341234" maxlength="12" type="text" id="flag_input" placeholder="Flag">
+    <button onclick="onSubmit()">Submit</button>
+    <div id="message" class="message"></div>
+  </div>
+
+  <div class="footer">
+    <a href="/sitemap.txt">Sitemap</a> | 
+    <a href="/disclaimer.txt">Disclaimer</a>
+  </div>
+  
+  <script>
+    let withFlags = "ignore_as_participant_used_for_admin_debug_view_no_hints_will_be_given"
+    const switchTab = (tab) => {
+      document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tab).classList.add('active');
+      document.querySelector(`.tab[onclick="switchTab('${tab}')"]`).classList.add('active');
+    };
+
+    const makeTableRow = (score) => {
+      const tr = document.createElement('tr');
+      tr.append(...Object.entries(score).map(([key,value]) => {
+        const td = document.createElement('td');
+        td.textContent = key == "flags" ? value.join("\n") : value;
+        return td;
+      }));
+      return tr;
+    };
+
+    const fetchLeaderboard = async () => {
+      try {
+        const response = await fetch(`./standings?withFlags=${withFlags}`);
+        const data = await response.json();
+        const leaderboardBody = document.getElementById('leaderboard_body');
+        leaderboardBody.replaceChildren(...data.map(makeTableRow));
+      } catch (error) {
+        console.error("Error fetching leaderboard:", error);
+      }
+    };
+    
+    setInterval(fetchLeaderboard, 60000);
+    fetchLeaderboard();
+
+    const onSubmit = async () => {
+      const user = document.getElementById('user_input').value;
+      const flag = document.getElementById('flag_input').value;
+      const messageDiv = document.getElementById('message');
+      
+      if (!user || !flag) return;
+      
+      const response = await fetch("./submit", {
+        method: "POST",
+        body: JSON.stringify({ user, flag }),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+      });
+      
+      const result = await response.json();
+      if (result.accepted) {
+        messageDiv.textContent = `Submission accepted! Got ${result.score} points`;
+        messageDiv.className = "message success";
+        document.getElementById('flag_input').value = '';
+        fetchLeaderboard();
+      } else {
+        messageDiv.textContent = `Submission rejected: ${result.reason}`;
+        messageDiv.className = "message error";
+      }
+    };
+  </script>
+</body>
+</html>

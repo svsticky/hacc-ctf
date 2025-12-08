@@ -80,7 +80,7 @@ app.post("/submit", (req, res) => {
       res.send({ 
         accepted: true, 
         score: f.score,
-        flavor_text, 
+        flavor: flavor_text
       })
       backup() 
       return

@@ -143,12 +143,12 @@
     </table>
   </div>
   
-  <div id="submissions" class="submissions content">
-    <input maxlength="16" type="text" id="user_input" placeholder="Username">
-    <input placeholder="ctf_12341234" maxlength="12" type="text" id="flag_input" placeholder="Flag">
-    <button onclick="onSubmit()">Submit</button>
+  <form id="submissions" class="submissions content">
+    <input maxlength="16" type="text" id="user_input" placeholder="Username" required>
+    <input placeholder="ctf_12341234" maxlength="12" type="text" id="flag_input" required>
+    <button id="submit">Submit</button>
     <div id="message" class="message"></div>
-  </div>
+  </form>
 
   <div class="footer">
     <a href="/sitemap.txt">Sitemap</a> | 
@@ -162,6 +162,8 @@
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.getElementById(tab).classList.add('active');
       document.querySelector(`.tab[onclick="switchTab('${tab}')"]`).classList.add('active');
+
+      document.querySelector('#message').innerHTML = '';
     };
 
     const makeTableRow = (score) => {
@@ -203,7 +205,7 @@
       
       const result = await response.json();
       if (result.accepted) {
-        messageDiv.textContent = `Submission accepted! Got ${result.score} points`;
+        messageDiv.textContent = result.flavor;
         messageDiv.className = "message success";
         document.getElementById('flag_input').value = '';
         fetchLeaderboard();
@@ -212,6 +214,11 @@
         messageDiv.className = "message error";
       }
     };
+
+    document.querySelector('#submissions').addEventListener('submit', (e) => {
+      onSubmit();
+      e.preventDefault();
+    });
   </script>
 </body>
 </html>

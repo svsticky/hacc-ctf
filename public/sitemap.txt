@@ -9,5 +9,7 @@ GET /config.js
 GET /flavour_texts.js
 GET /sitemap.txt
 GET /disclaimer.txt
+GET /primes
+GET /random_bytes
 
 # 1 node hidden

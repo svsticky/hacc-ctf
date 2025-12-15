@@ -14,6 +14,7 @@ GET /disclaimer.txt
 GET /primes
 GET /random_bytes
 GET /puzzle.zip
+GET /video.mov
 GET /export
 GET /exportraw
 

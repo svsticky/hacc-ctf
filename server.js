@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve('./index.html'))
 })
 
-app.get("/pandas", (req, res) => {
+app.get("/panda", (req, res) => {
   res.send("ctf_12460658")
 })
 
@@ -82,7 +82,7 @@ app.post("/submit", (req, res) => {
       res.send({ 
         accepted: true, 
         score: f.score,
-        flavor_text, 
+        flavor: flavor_text
       })
       backup() 
       return
@@ -93,7 +93,10 @@ app.post("/submit", (req, res) => {
       accepted: false, 
       reason: "Unknown flag."
     })
-    return
+
+    handedInFlags[user][flag] = { time: Date.now(), score: -1 };
+    backup();
+    return;
   }
 })
 

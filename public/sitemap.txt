@@ -6,9 +6,15 @@ GET /
 GET /standings
 GET /notulen
 GET /flags.txt
+GET /favicon.ico
 GET /config.js
 GET /flavour_texts.js
 GET /sitemap.txt
 GET /disclaimer.txt
+GET /primes
+GET /random_bytes
+GET /puzzle.zip
+GET /export
+GET /exportraw
 
-# 1 node hidden
+# 1 nodes hidden

@@ -6,7 +6,7 @@ COPY package.json .
 
 RUN npm i --ignore-scripts
 
-COPY server.js flags.csv index.html ./
+COPY server.js flags.csv index.html notulen.html ./
 COPY public ./public
 
 USER 1000

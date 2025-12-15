@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HACC CTF 2025</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      align-items: center;
+    }
+    .header {
+      padding: 10px 20px;
+      background: #2a2a2a;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 70px;
+      gap: 10px;
+    }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      background: #333;
+      border-radius: 5px;
+    }
+    .tab.active {
+      background: #0b6200;
+    }
+    .content {
+      display: none ;
+      padding: 20px;
+      background: #2a2a2a;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      max-width: 1300px;
+      width: calc(100% - 60px);
+      margin-top: 20px;
+    }
+    .content.active {
+      display: block;
+    }
+    .content.submissions.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 50vh;
+      max-width: 400px;
+      width: calc(100% - 60px);
+    }
+    .message {
+      margin-top: 10px;
+      font-size: 1em;
+      text-align: center;
+    }
+    .error {
+      color: red;
+    }
+    .success {
+      color: green;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      border-bottom: 1px solid #444;
+      text-align: left;
+    }
+    thead {
+      background: #0b6200;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #3a3a3a;
+      color: white;
+    }
+    button {
+      background: #0b6200;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #066401;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #2a2a2a;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    
+    .footer a {
+      color: #0b6200;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">Notulen vergaderingen CTF</div>
+
+  <ul>
+    <li>
+      Vergadering 15-12-2025: De hoop van de vorige vergadering was tervergeefs. Iedereen was te druk en we krijgen niks af.
+      We zijn bang dat de flags nu te makkelijk gevonden gaan worden. Rens komt opeens binnen en zegt dat hij alles in een weekend gebeund heeft.
+      Gelukkig hebben we toch nog iets, Koen begint direct met deployen van alles wat Rens gemaakt heeft.
+    </li>
+    <li>
+      Vergadering 9-12-2025: de opnameapparatuur is al weer kapot omdat Marcel er bier over heen heeft gemorst. We hebben heel gezellig gepraat
+      over hoe goed onze flags wel niet zijn. Lukas brengt de implementatie van de flags op: we concluderen dat niemand nog hieraan had gedacht.
+      We hebben nog een kleine week om alles te doen, maar na een inspirerende speach van Job heeft iedereen nog hoop.
+    </li>
+    <li>
+      Vergadering 31-11-2025: we testen een nieuw systeem waarbij we niet hoeven te notuleren maar de vergadering opnemen.
+      De opname van de vergadering is te vinden op <a href="https://drive.google.com/file/d/11JOx2vd7I1p8kEWG1O4NNekQX48HgWDS/view?usp=sharing&t=2444">google drive</a>.
+    </li>
+    <li>
+      Vergadering 20-11-2025: we moeten maar eens een nieuwe activiteit verzinnen. Lorenzo oppert het idee van een capture the flag en iedereen is het ermee eens.
+      We hebben heel hard gewerkt om heel veel flags te verzinnen en we hebben ze gecompiled in het volgende <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">bestand</a>.
+      Dit belooft een leuke activiteit te worden.
+    </li>
+  </ul>
+  
+  <div class="footer">
+    <a href="/sitemap.txt">Sitemap</a> | 
+    <a href="/disclaimer.txt">Disclaimer</a>
+  </div>
+</body>
+</html>

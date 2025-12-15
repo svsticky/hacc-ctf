@@ -4,6 +4,7 @@ POST submit
 # GET
 GET /
 GET /standings
+GET /notulen
 GET /flags.txt
 GET /config.js
 GET /flavour_texts.js

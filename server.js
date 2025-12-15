@@ -42,6 +42,8 @@ app.get("/pandas", (req, res) => {
   res.send("ctf_12460658")
 })
 
+app.get("/notulen", (_, res) => res.sendFile(path.resolve("./notulen.html")));
+
 app.post("/submit", (req, res) => { 
   let { user, id, flag } = req.body
   user = user.slice(0, 16);
